@@ -16,7 +16,10 @@ class Config:
     input_path: str = os.getenv('INPUT_PATH', f'{input_dir}/{input_name}.jpg')
     skeleton_path: str = os.getenv('SKELETON_PATH', f'{output_dir}/{input_name}-skeleton.png')
     graph_path: str = os.getenv('GRAPH_PATH', f'{output_dir}/{input_name}-graph.png')
-
+    small_component_threshold: int = int(os.getenv('SMALL_COMPONENT_THRESHOLD', '30'))
+    neighbor_component_min_size: int = int(os.getenv('NEIGHBOR_COMPONENT_MIN_SIZE', '50'))
+    neighbor_component_max_distance: int = int(os.getenv('NEIGHBOR_COMPONENT_MAX_DISTANCE', '100'))
+    large_component_max_size: int = int(os.getenv('LARGE_COMPONENT_MAX_SIZE', '1000'))
 
     def __new__(cls):
         if not cls._instance:
@@ -32,4 +35,8 @@ class Config:
         input_path: {self.input_path},
         skeleton_path: {self.skeleton_path},
         graph_path: {self.graph_path},
+        small_component_threshold: {self.small_component_threshold},
+        neighbor_component_min_size: {self.neighbor_component_min_size},
+        neighbor_component_max_distance: {self.neighbor_component_max_distance},
+        large_component_max_size: {self.large_component_max_size},
         )'''
