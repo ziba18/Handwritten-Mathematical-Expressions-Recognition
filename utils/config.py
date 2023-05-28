@@ -15,6 +15,8 @@ class Config:
     output_dir: str = os.getenv('OUTPUT_DIR', './output')
     input_path: str = os.getenv('INPUT_PATH', f'{input_dir}/{input_name}.jpg')
     skeleton_path: str = os.getenv('SKELETON_PATH', f'{output_dir}/{input_name}-skeleton.png')
+    graph_path: str = os.getenv('GRAPH_PATH', f'{output_dir}/{input_name}-graph.png')
+
 
     def __new__(cls):
         if not cls._instance:
@@ -29,4 +31,5 @@ class Config:
         output_dir: {self.output_dir},
         input_path: {self.input_path},
         skeleton_path: {self.skeleton_path},
+        graph_path: {self.graph_path},
         )'''
