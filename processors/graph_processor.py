@@ -3,6 +3,7 @@ import networkx as nx
 import numpy as np
 from matplotlib import pyplot as plt
 
+from processors.component_remover import ComponentRemover
 from utils.config import Config
 
 
@@ -12,7 +13,7 @@ class GraphProcessor:
         self.skeleton = skeleton
         self.rows = self.skeleton.shape[0]
         self.columns = self.skeleton.shape[1]
-        self.graph_path = Config().graph_path
+        self._graph_path = Config().graph_path
 
     def process_graph(self):
         for x, row in enumerate(self.skeleton):
@@ -25,6 +26,10 @@ class GraphProcessor:
                                 self.graph.add_edge((x, y), neighbor)
                         except IndexError:
                             continue
+        component_remover = ComponentRemover(self.graph)
+        component_remover.remove_large_components()
+        component_remover.remove_small_components()
+
 
     def plot_graph(self):
         pos = {(x, y): (y, self.rows - x) for x, y in self.graph.nodes}
@@ -39,5 +44,5 @@ class GraphProcessor:
         for x, y in self.graph.nodes:
             cv2.circle(output, (y, x), 1, (0, 0, 0), -1)
 
-        cv2.imwrite(self.graph_path, output)
+        cv2.imwrite(self._graph_path, output)
         print(self.graph)
