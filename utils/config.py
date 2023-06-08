@@ -20,6 +20,11 @@ class Config:
     neighbor_component_min_size: int = int(os.getenv('NEIGHBOR_COMPONENT_MIN_SIZE', '50'))
     neighbor_component_max_distance: int = int(os.getenv('NEIGHBOR_COMPONENT_MAX_DISTANCE', '100'))
     large_component_max_size: int = int(os.getenv('LARGE_COMPONENT_MAX_SIZE', '1000'))
+    default_canvas_size: int = int(os.getenv('DEFAULT_CANVAS_SIZE', '1000'))
+    adjlist_output_path: str = os.getenv('ADJLIST_PATH', '1000')
+    alpha: int = int(os.getenv('alpha', '5'))
+    min_keep_percentage: int = int(os.getenv('NODES_MIN_PERCENTAGE_TO_KEEP', '3'))
+    max_keep_percentage: int = int(os.getenv('NODES_MAX_PERCENTAGE_TO_KEEP', '5'))
 
     def __new__(cls):
         if not cls._instance:
@@ -39,4 +44,7 @@ class Config:
         neighbor_component_min_size: {self.neighbor_component_min_size},
         neighbor_component_max_distance: {self.neighbor_component_max_distance},
         large_component_max_size: {self.large_component_max_size},
+        adjlist_output_path: {self.adjlist_output_path},
+        min_keep_percentage:{self.min_keep_percentage},
+        max_keep_percentage:{self.max_keep_percentage},
         )'''
